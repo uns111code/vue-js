@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+#app{
+	display: flex;
+	margin-left: 2%;
+	margin-right:2%;
+
+}
+.container{
+	margin-top:8px;
+	width:100%;
+	display: flex;
+}
+.sidebar{
+  padding:50px;
+  color:cyan;
+  font-family: 'Muli', sans-serif;
+  width:20%;
+  font-size: 24px;
+  height:100vh;
+  background-color: #065a75;
+}
+.courses-container{
+    width:90%;
+    font-family: 'Muli', sans-serif;
+    display: flex;
+    margin-left:40px;
+    color:black;
+    flex-direction: column;
+}
+.watch-card {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  width:80%;
+  max-width: 850px;
+  margin: 20px;
+  overflow: hidden;
+}
+
+.watch-card h6 {
+  opacity: 0.6;
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.watch-card h2 {
+  letter-spacing: 1px;
+  margin: 10px 0;
+}
+
+.course-preview {
+  background-color: #2A265F;
+  color: #fff;
+  padding: 30px;
+  min-width: 200px;
+}
+
+.course-preview a {
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.6;
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.course-info {
+  padding: 30px;
+  position: relative;
+  width: 100%;
+}
+
+
+
+.btn {
+  background-color: #2A265F;
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 16px;
+  padding: 12px 25px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  letter-spacing: 1px;
+}
