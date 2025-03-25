@@ -43,6 +43,24 @@ const continueBtnHandler = () => {
     </div>
 </template>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style scoped>
 .watch-card {
   background-color: #fff;

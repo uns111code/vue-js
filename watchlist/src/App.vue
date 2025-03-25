@@ -1,14 +1,22 @@
 <script setup>
+// import { Sidebar } from "./components/Sidebar.vue";
 import WatchCard from "./components/WatchCard.vue";
 import { userWatchList } from "./assets/js/watchList.js";
 import { ref } from "vue";
 
+
 const watchList = ref(userWatchList);
+
+
+
+const currentEpisode = ref("");
 
 const onSelectedEpisodeHandler = (episodeTitle) => {
   console.log('entendu', episodeTitle);
-  return episodeTitle;
+  currentEpisode.value = episodeTitle;
 }
+
+
 
 </script>
 
@@ -20,7 +28,7 @@ const onSelectedEpisodeHandler = (episodeTitle) => {
         <li>Un lien de nav 1</li>
         <li>Un lien de nav 2</li>
       </ul>
-      <span>▶ Lecture en cours: {{  }} </span>
+      <span>▶ Lecture en cours: {{ currentEpisode }}</span>
     </section>
     
     <main class="courses-container">
