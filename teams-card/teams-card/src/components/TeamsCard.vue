@@ -1,5 +1,5 @@
 <script setup>
-import {  } from "module";
+
 const props = defineProps(
     {
     firstName: {
@@ -13,6 +13,7 @@ const props = defineProps(
     stack: Array
 }
 );
+import StackTechno from "./StackTechno.vue";
 // 2
 // const fullprofilePic = `url(src/assets/img/${props.profilePic})`;
 // console.log(fullprofilePic);
@@ -27,20 +28,21 @@ const props = defineProps(
       <h2>{{ firstName }} {{ lastName }}</h2>
       <p>{{verbatim}}</p>
     </div>
-    <div class="card-stats">
-      <div class="stat" 
-      v-for="techno in stack" 
+    <StackTechno 
+      v-for="techno in StackTechno" 
       :key="techno.label"
-      >
-        <div class="techno">{{ techno.label }}</div>
+      :label="techno.label"
+      :level="techno.level"
+    />
+    <!-- <div class="card-stats">
+      <div class="stat">  -->
+        <!-- <div class="techno">{{ techno.label }}</div>
         <div class="level">{{ '⭐' .repeat(techno.level) }}</div>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
 </div>
 </template>
-
 <style scoped>
-
 .card {
   display: grid;
   grid-template-columns: 300px;

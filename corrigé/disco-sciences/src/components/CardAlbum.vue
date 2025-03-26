@@ -1,6 +1,4 @@
 <script setup>
-// import { defineProps, defineEmits } from 'vue';
-
 
 const props = defineProps(
     {
@@ -18,18 +16,6 @@ const props = defineProps(
     }
 )
 
-
-// const emit = defineEmits(["updateStock"]);
-
-// const increaseStock = () => {
-//   emit("updateStock", { id: props.id, action: "increase" });
-// };
-
-// const decreaseStock = () => {
-//   if (props.stock > 0) {
-//     emit("updateStock", { id: props.id, action: "decrease" });
-//   }
-// };
 
 const emit = defineEmits(["onIncreaseStock", "onDecreaseStock"]);
 const increaseStock = () => {
