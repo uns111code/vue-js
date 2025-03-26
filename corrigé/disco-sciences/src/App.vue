@@ -25,7 +25,6 @@ const decreaseStockHandler = (id) => {
 
 
 
-
 const isStockOnly = ref(false);
 
 const stockOnlyHandler = () => {
