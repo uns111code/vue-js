@@ -1,43 +1,10 @@
 <script setup>
+
 import { computed, ref } from "vue";
-
-const typeHebrgement = ref("default");
-
-const kayak = ref(false);
-const draps = ref(false);
-const petitDej = ref(null);     //   Un input radio renvoie une chaîne de caractères ("on", "off", etc.).    Aucune option sélectionnée (État initial)
-
-const priceUpdate = computed(() => {
-  let totalPrice = 0;
-
-  switch (typeHebrgement.value) {
-    case "tente":
-      totalPrice = 30;
-      break;
-    case "toile":
-      totalPrice = 50;
-      break;
-    case "pierre":
-      totalPrice = 100;
-      break;
-    default:
-      totalPrice = 150;
-  }
-
-  // Ajout des options supplémentaires
-  if (kayak.value) totalPrice += 30;
-  if (draps.value) totalPrice += 5;
-
-  // Gestion du petit déjeuner
-  if (petitDej.value === "off") totalPrice -= 10;
-
-  return totalPrice;
-});
-//  console.log(kayak.value);
- 
+import { defineEmits } from "vue";
 
 const updateImgSrc = computed(() => {
-  switch (typeHebrgement.value) {
+  switch (formData.value.typeHebrgement) {
     case "tente":
       return new URL("@/assets/img/tente.jpg", import.meta.url).href;
     case "toile":
@@ -49,37 +16,77 @@ const updateImgSrc = computed(() => {
   }
 });
 
-const emit = defineEmits("onSubmit");
-
-
-
-
-
-
-
-
-
-
 const formData = ref(
     {
         firstName: "",
         lastName: "",
-        typeHebrgement: "",
-        kayak: "",
-        draps: "",
-        petitDej: ""
+        typeHebrgement: "default",
+        kayak: false,
+        draps: false,
+        petitDej: "on",
+        updateImgSrc: updateImgSrc,
+        onSubmit: false
 
     }
 )
 
+const priceUpdate = computed(() => {
+  let totalPrice = 0;
+
+  switch (formData.value.typeHebrgement) {
+    case "tente":
+      totalPrice = 30;
+      break;
+    case "toile":
+      totalPrice = 50;
+      break;
+    case "pierre":
+      totalPrice = 100;
+      break;
+    default:
+      totalPrice = 0;
+  }
+
+  // Ajout des options supplémentaires
+  if (formData.value.kayak) totalPrice += 30;
+  if (formData.value.draps) totalPrice += 5;
+
+  // Gestion du petit déjeuner
+  if (formData.value.petitDej === "off") totalPrice -= 10;
+
+  return totalPrice;
+});
+//  console.log(kayak.value);
+ 
+
+
+
+const emit = defineEmits(["sendData"]);
+
+const onSubmit = () => {
+  if (verifInput()) {
+    formData.value.onSubmit = true;
+    emit("sendData", formData.value )
+  } else {
+
+  }
+}
+
+const errorMessage = ref("");
+
+const verifInput = () => {
+  if (formData.value.firstName.trim() === "" || formData.value.lastName.trim() === "" || formData.value.typeHebrgement === "default") {
+    errorMessage.value = "Merci de remplir tous les champs obligatoires et de sélectionner un hébergement.";
+    return false;
+  }
+  errorMessage.value = "";
+  return true;
+};
+
 // console.log(formData.firstName);
 
 </script>
-
 <template>
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-      <h5 class="my-0 mr-md-auto font-weight-normal"> Notre Super Séjour dans les arbres </h5>
-</div>
 <div class="container">
 
     <div class="row" >
@@ -117,7 +124,7 @@ const formData = ref(
                 <select
                  class="custom-select d-btypelock w-100"
                   id="type"
-                  v-model="typeHebrgement"
+                  v-model="formData.typeHebrgement"
                   >
                   <option value="default">Choisissez...</option>
                   <option value="tente">Emplacement Tentes</option>
@@ -135,7 +142,7 @@ const formData = ref(
                    name="optionsSejour" 
                    value="kayak" 
                    id="ok-kayak"
-                   v-model="kayak"
+                   v-model="formData.kayak"
                    >
                   <label class="custom-control-label" for="ok-kayak">Location Kayak (+30€)</label>
                 </div>
@@ -146,7 +153,7 @@ const formData = ref(
                     name="optionsSejour" 
                     value="draps" 
                     id="ok-draps"
-                    v-model="draps"
+                    v-model="formData.draps"
                     >
                   <label class="custom-control-label" for="ok-draps">Draps (+5€) </label>
                 </div>
@@ -161,7 +168,7 @@ const formData = ref(
                           class="custom-control-input" 
                           checked
                           value="on" 
-                          v-model="petitDej"
+                          v-model="formData.petitDej"
                           >
                         <label class="custom-control-label" for="ouiPetitDej">Oui (+10€)</label>
                       </div>
@@ -172,16 +179,26 @@ const formData = ref(
                           type="radio" 
                           class="custom-control-input" 
                           value="off"
-                          v-model="petitDej"
+                          v-model="formData.petitDej"
                           >
                         <label class="custom-control-label" for="nonPetitDej">Non</label>
                       </div>
                 </div>
-                <div class="alert alert-warning" role="alert" :style="{ visibility: typeHebrgement != 'default' ? 'hidden' : 'visible' }">
-                  Erreur, merci de séléctionner un hébergement
+                <div 
+                  class="alert alert-warning" 
+                  role="alert" 
+                  :style="{ visibility: verifInput()  ? 'hidden' : 'visible' }"
+                  >
+                  {{ errorMessage }}
+                  
                 </div>
                 <div class='mt-2'>
-                    <button id="submitButton" type="button" class="btn btn-lg btn-block btn-primary">Ok</button>
+                    <button 
+                      id="submitButton" 
+                      type="button" 
+                      class="btn btn-lg btn-block btn-primary"
+                      @click="onSubmit"
+                      >Ok</button>
                 </div>
 
               </div>
@@ -198,36 +215,6 @@ const formData = ref(
 
         </div>
     </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container d-flex justify-content-center">
-  <div class="card" style="width: 18rem;">
-    <img :src="updateImgSrc" class="card-img-top" alt="default">
-    <div class="card-body">
-      <h5 class="card-title">Votre Récap</h5>
-      <p class="card-text">Nous vous souhaitons un bon séjour <strong>{{ formData.firstName }}</strong> {{ formData.lastName }} </p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Hébergement:  <strong>{{ typeHebrgement }}</strong></li>
-      <li class="list-group-item">{{kayak ? 'Kayak ⛴' : "" }} {{ kayak & draps ? "&" : "" }} {{ draps ? 'Draps' : "" }}</li>
-      <li class="list-group-item"><strong>Options déjeuner {{ petitDej === "off" ? "❌" : "✅" }}</strong></li>
-    </ul>
-    <div class="card-body">
-        <button id="submitButton" type="button" class="btn btn-lg btn-block btn-primary">Confirmer</button>
-    </div>
-  </div>
 </div>
 
 </template>
