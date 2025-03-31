@@ -3,24 +3,12 @@
 import { computed, ref } from "vue";
 import { defineEmits } from "vue";
 
-// const updateImgSrc = computed(() => {
-//   switch (formData.value.typeHebrgement) {
-//     case "tente":
-//       return new URL("@/assets/img/tente.jpg", import.meta.url).href;
-//     case "toile":
-//       return new URL("@/assets/img/toile.jpg", import.meta.url).href;
-//     case "pierre":
-//       return new URL("@/assets/img/pierre.jpg", import.meta.url).href;
-//     default:
-//       return new URL("@/assets/img/default.jpg", import.meta.url).href;
-//   }
-// });
 
 const formData = ref(
     {
         firstName: "",
         lastName: "",
-        typeHebrgement: "default|0",
+        typeHebrgement: "default",
         kayak: false,
         draps: false,
         petitDej: "on",
@@ -32,15 +20,27 @@ const formData = ref(
 
 
 
-  const selectedValues = computed(() => {
-  return formData.value.typeHebrgement.split("|");
-});
-
-
 
 
 const priceUpdate = computed(() => {
+
+  if (formData.value.typeHebrgement === "default") return 'N/A';
+
   let totalPrice = 0;
+  
+  switch (formData.value.typeHebrgement) {
+    case "tente":
+      totalPrice = 30;
+      break;
+    case "toile":
+      totalPrice = 50;
+      break;
+    case "pierre":
+      totalPrice = 100;
+      break;
+    default:
+      totalPrice = 0;
+  }
 
   if (formData.value.kayak) totalPrice += 30;
   if (formData.value.draps) totalPrice += 5;
@@ -120,10 +120,10 @@ const verifInput = () => {
                   id="type"
                   v-model="formData.typeHebrgement"
                   >
-                  <option value="default|0">Choisissez...</option>
-                  <option value="tente|30">Emplacement Tentes</option>
-                  <option value="toile|50">Camp</option>
-                  <option value="pierre|100">Pierre</option>
+                  <option value="default">Choisissez...</option>
+                  <option value="tente">Emplacement Tentes</option>
+                  <option value="toile">Camp</option>
+                  <option value="pierre">Pierre</option>
                 </select>
 
                 <hr class="mb-4">
@@ -201,9 +201,9 @@ const verifInput = () => {
         <div class="col-4">
 
             <div class="card" style="width: 18rem;">
-              <img :src="`src/assets/img/${selectedValues[0]}.jpg`" class="card-img-top" alt="">
+              <img :src="`src/assets/img/${formData.typeHebrgement}.jpg`" class="card-img-top" alt="">
             <div class="card-body">
-              <h6 class="card-title text-center">{{ priceUpdate + parseInt(selectedValues[1]) }}€</h6>
+              <h6 class="card-title text-center">{{ priceUpdate }}€</h6>
             </div>
           </div>
 
