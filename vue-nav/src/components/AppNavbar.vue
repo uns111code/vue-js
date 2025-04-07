@@ -1,6 +1,9 @@
 <script setup>
+import router from '@/router';
 
-import { RouterLink } from 'vue-router';
+
+// import { RouterLink } from 'vue-router';
+console.log(router.routes);
 
 </script>
 
@@ -21,8 +24,11 @@ import { RouterLink } from 'vue-router';
             </li>
         </ul>
     </nav>
+    
 </template>
 
 <style scoped>
-
+.router-link-active:after {
+ content: "🐴";
+}
 </style>

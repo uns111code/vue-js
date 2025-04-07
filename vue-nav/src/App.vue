@@ -4,8 +4,6 @@
 import  AppNavBar  from "./components/AppNavbar.vue";
 
 
-
-
 </script>
 
 <template>
