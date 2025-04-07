@@ -22,6 +22,11 @@ onBeforeMount(async () => {
 </script>
 
 <template>
+    <article class="title">
+      <h1>Books List</h1>
+      <h2>What would you like to read?</h2>
+      <p>Here are some books that everyone should read at least once</p>
+    </article>
     <section class="books-list">
       <article 
       v-for="book in books"
@@ -49,28 +54,12 @@ onBeforeMount(async () => {
 </template>
 
 <style scoped>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-img,
-figure,
-video {
-    max-width: 100%;
-    object-fit: cover;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul,
-ol {
-    list-style: none;
+.title {
+  padding-top: 10rem;
+  font-size: 1.5rem;
+  h1 {
+    font-size: 3rem;
+  }
 }
 
 button {
@@ -91,6 +80,7 @@ button.delete {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5rem;
+  padding: 10rem;
 }
 
 .book {
