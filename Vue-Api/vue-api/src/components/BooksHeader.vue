@@ -22,7 +22,7 @@ watch(isOpen, (newValue) => {
 <template>
   <header>
     <button
-      :class="{ 'navbar-burger': true, 'open': isOpen }"
+      :class="isOpen ? 'navbar-burger open' : 'navbar-burger'"
       @click="toggleMenu"
     >
       <span class="navbar-burger-bar"></span>
@@ -51,10 +51,9 @@ watch(isOpen, (newValue) => {
         <h4>Books</h4>
       </section>
     </RouterLink>
-    <section class="search-profil">
-        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314" stroke-width="1"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1"><path stroke-linejoin="round" d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="7" r="3"/></g></svg>
-    </section>
+    <RouterLink to="/login" class="search-profil">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="50" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1"><path stroke-linejoin="round" d="M4 18a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="7" r="3"/></g></svg>
+    </RouterLink>
   </header>
 </template>
 
@@ -117,15 +116,31 @@ header {
   justify-content: space-between;
   width: clamp(320px, 80vw, 1200px);
 }
-.search {
-  width: 40rem;
-}
+/* .search {
+  position: relative;
+  svg {
+    color: black;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+  }
+  .srch-input { */
+    /* width: 4rem; */
+    /* padding: 1rem 1rem;
+    border-radius: 50px;
+    font-size: 1rem;
+  }
+} */
+/* .search.active {
+  width: 15rem;
+} */
 
 
 .navbar-burger {
     border: none;
     background: transparent;
     cursor: pointer;
+    padding: 1rem;
 }
 
 .navbar-burger .navbar-burger-bar {
@@ -176,10 +191,10 @@ header {
 
 
 
-.search-profil {
+/* .search-profil {
   display: flex;
   gap: 2rem;
-}
+} */
 
 
 
@@ -223,5 +238,9 @@ header {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* .logo {
+  margin-left: 200px;
+} */
 
 </style>

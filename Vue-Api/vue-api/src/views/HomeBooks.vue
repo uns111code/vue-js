@@ -1,12 +1,30 @@
 <script setup>
+import { ref, onBeforeMount } from "vue";
 
+const books = ref(0);
+
+const apiBaseUrl = 'http://localhost:3000/books?page=1&perPage=500';
+
+async function fetchAllbooks() {
+  try {
+    const response = await fetch(apiBaseUrl);
+    const data = await response.json();
+    books.value = data.length;
+  } catch (error) {
+    console.error('Erreur lors de la récupération des livres', error);
+  }
+}
+
+onBeforeMount(async () => {
+  await fetchAllbooks();
+});
 </script>
 
 <template>
     <section class="sxn-home">
         <div>
             <h1>The<br>
-                <span class="nbr-books">100</span><br>
+                <span class="nbr-books">{{books}}</span><br>
                  Best Books <br>
                  of All Time
              </h1>
