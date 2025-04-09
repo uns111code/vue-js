@@ -37,7 +37,7 @@ onBeforeMount(async () => {
 
 <style scoped>
 .sxn-home {
-    background: linear-gradient(180deg, rgba(12,77,158,1) 13%, rgba(9,160,141,1) 50%, rgba(23,198,160,1) 100%);
+    /* background: linear-gradient(180deg, rgba(12,77,158,1) 13%, rgba(9,160,141,1) 50%, rgba(23,198,160,1) 100%); */
     height: 85vh;
     display: flex;
     flex-direction: column;

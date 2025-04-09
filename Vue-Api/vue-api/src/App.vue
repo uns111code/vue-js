@@ -18,5 +18,7 @@ import Header from "./components/BooksHeader.vue";
 <style scoped>
 main {
   text-align: center;
+  width: 100vw;
+  /* background-color: #e1e4ed; */
 }
 </style>

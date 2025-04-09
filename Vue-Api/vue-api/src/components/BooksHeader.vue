@@ -27,7 +27,7 @@ watch(isOpen, (newValue) => {
     >
       <span class="navbar-burger-bar"></span>
     </button>
-    <transition name="menu-fade">
+  <transition name="menu-fade">
   <nav v-if="isOpen" class="navigation">
     <ul class="nav-items">
       <li>
@@ -100,11 +100,10 @@ ol {
 header {
   display: flex;
   justify-content: space-between;
-  background-color: rgb(12, 77, 158);
   color: white;
   align-items: center;
-  padding: 0 3rem;
-  height: 15vh;
+  padding: 1rem 3rem;
+  /* height: 15vh; */
   position: relative;
 }
 
@@ -116,25 +115,6 @@ header {
   justify-content: space-between;
   width: clamp(320px, 80vw, 1200px);
 }
-/* .search {
-  position: relative;
-  svg {
-    color: black;
-    position: absolute;
-    right: 15px;
-    top: 10px;
-  }
-  .srch-input { */
-    /* width: 4rem; */
-    /* padding: 1rem 1rem;
-    border-radius: 50px;
-    font-size: 1rem;
-  }
-} */
-/* .search.active {
-  width: 15rem;
-} */
-
 
 .navbar-burger {
     border: none;
@@ -188,19 +168,6 @@ header {
     transform: rotate(-45deg);
 }
 
-
-
-
-/* .search-profil {
-  display: flex;
-  gap: 2rem;
-} */
-
-
-
-
-
-
 .navigation {
   position: absolute;
   top: 100%;
@@ -238,9 +205,5 @@ header {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* .logo {
-  margin-left: 200px;
-} */
 
 </style>
