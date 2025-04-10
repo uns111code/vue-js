@@ -5,6 +5,7 @@ import { ref, computed, onBeforeMount } from "vue";
 // const router = useRouter();
 
 const books = ref([]); // on stock la valeur de la fontion fetchAllbooks
+
 const searchTerm = ref(""); // on stock la valeur de l'input de search
 
 const apiBaseUrl = 'http://localhost:3000/books';
@@ -186,22 +187,8 @@ onBeforeMount(async () => {
   overflow: auto; /* Permet de défiler sans barre visible */
   scrollbar-width: none; /* Cacher la barre de défilement */
   
--webkit-mask-image: linear-gradient(to right, 
-  transparent 0%, 
-  black 10%, 
-  black 90%, 
-  transparent 100%);
-mask-image: linear-gradient(to right, 
-  transparent 0%, 
-  black 10%, 
-  black 90%, 
-  transparent 100%);
-
--webkit-mask-size: 100% 100%;
-mask-size: 100% 100%;
--webkit-mask-repeat: no-repeat;
-mask-repeat: no-repeat;
-transition: overflow 4s ease;
+  mask-image: linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%, black 70%, transparent 100%);
 }
 
 /* Cacher la barre de défilement sur les navigateurs WebKit (Chrome, Safari, etc.) */
